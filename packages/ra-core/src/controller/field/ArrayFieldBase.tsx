@@ -15,21 +15,15 @@ import type { BaseFieldProps } from './types';
  *
  * @example
  * const PostShow = () => (
- *    <Show>
- *       <SimpleShowLayout>
- *           <ArrayFieldBase source="tags">
- *               <WithListContext
- *                   render={({ data }) => (
- *                       <ul>
- *                           {data.map(tag => (
- *                               <li key={tag.name}>{tag.name}</li>
- *                           ))}
- *                       </ul>
- *                   )}
- *               />
- *           </ArrayFieldBase>
- *      </SimpleShowLayout>
- *   </Show>
+ *    <ShowBase>
+ *       <ArrayFieldBase source="tags">
+ *          <ul>
+ *              <RecordsIterator
+ *                  render={record => <li key={record.id}>{record.name}</li>}
+ *              />
+ *          </ul>
+ *       </ArrayFieldBase>
+ *   </ShowBase>
  * );
  *
  * @see useListContext
