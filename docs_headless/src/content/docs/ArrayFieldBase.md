@@ -66,11 +66,11 @@ const PostShow = () => (
 
 | Prop       | Required | Type                 | Default | Description                                                                          |
 | ---------- | -------- | -------------------- | ------- | ------------------------------------------------------------------------------------ |
-| `children` | Required | `ReactNode`          | -       | The UI rendered inside the `ListContext`.                                            |
-| `filter`   | Optional | `object`             | -       | A permanent filter applied client-side to the embedded array.                        |
-| `exporter` | Optional | `function \| false`  | -       | The exporter function exposed through the list context for export actions.           |
-| `perPage`  | Optional | `number`             | `1000`  | The number of records to display per page.                                           |
-| `sort`     | Optional | `{ field, order }`   | -       | The sort applied client-side to the embedded array.                                  |
+| `children` | Required | `ReactNode`         | -       | The UI rendered inside the `ListContext`.                                   |
+| `exporter` | Optional | `function \| false` | -       | The exporter function exposed through the list context for export actions.  |
+| `filter`   | Optional | `object`            | -       | A permanent filter applied client-side to the embedded array.               |
+| `perPage`  | Optional | `number`            | `1000`  | The number of records to display per page.                                  |
+| `sort`     | Optional | `{ field, order }`  | -       | The sort applied client-side to the embedded array.                         |
 
 `<ArrayFieldBase>` also accepts the base field props `source`, `record`, and `resource`.
 
@@ -97,6 +97,10 @@ const BacklinksField = () => (
     </ArrayFieldBase>
 );
 ```
+
+## `exporter`
+
+If one of the children exposes an export action through the list context, you can customize the export behavior with the `exporter` prop, or disable it entirely by passing `false`.
 
 ## `filter`
 
@@ -134,7 +138,3 @@ By default, `<ArrayFieldBase>` displays items in the order they appear in the ar
     </ul>
 </ArrayFieldBase>
 ```
-
-## `exporter`
-
-If one of the children exposes an export action through the list context, you can customize the export behavior with the `exporter` prop, or disable it entirely by passing `false`.
