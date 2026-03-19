@@ -102,6 +102,39 @@ const BacklinksField = () => (
 
 If one of the children exposes an export action through the list context, you can customize the export behavior with the `exporter` prop, or disable it entirely by passing `false`.
 
+For instance, you can expose a custom export button for the embedded array:
+
+```jsx
+import { ArrayFieldBase, downloadCSV, useListContext } from 'ra-core';
+import jsonExport from 'jsonexport/dist';
+
+const exporter = backlinks => {
+    const backlinksForExport = backlinks.map(({ uuid, url }) => ({
+        uuid,
+        url,
+    }));
+    jsonExport(backlinksForExport, (err, csv) => {
+        downloadCSV(csv, 'backlinks');
+    });
+};
+
+const ExportBacklinksButton = () => {
+    const { data, exporter } = useListContext();
+
+    if (!data || data.length === 0 || !exporter) {
+        return null;
+    }
+
+    return <button onClick={() => exporter(data)}>Export backlinks</button>;
+};
+
+const PostBacklinks = () => (
+    <ArrayFieldBase source="backlinks" exporter={exporter}>
+        <ExportBacklinksButton />
+    </ArrayFieldBase>
+);
+```
+
 ## `filter`
 
 By default, `<ArrayFieldBase>` displays all records from the embedded array. Use the `filter` prop to keep only matching items. Filtering happens client-side, after reading the array value from the record.
